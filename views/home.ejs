@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploading Files</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 350px;
+            animation: scaleUp 0.6s ease-in-out;
+            position: relative;
+        }
+
+        @keyframes scaleUp {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input[type="file"] {
+            margin: 12px 0;
+            padding: 8px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            width: 100%;
+            cursor: pointer;
+            background: #f9f9f9;
+            transition: all 0.3s ease-in-out;
+        }
+
+        input[type="file"]:hover {
+            border-color: #667eea;
+            background: #eef2ff;
+        }
+
+        button {
+            background: linear-gradient(to right, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #764ba2, #667eea);
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        /* Loading animation on button click */
+        .loading::after {
+            content: "";
+            border: 3px solid white;
+            border-top: 3px solid transparent;
+            border-radius: 50%;
+            width: 15px;
+            height: 15px;
+            position: absolute;
+            right: 15px;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Upload Files</h2>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <label><b>Profile Image:</b></label>
+            <input type="file" name="profileImage" required/>
+
+            <label><b>Cover Image:</b></label>
+            <input type="file" name="coverImage" required/>
+
+            <button type="submit" id="uploadBtn">Upload</button>
+        </form>
+    </div>
+
+    <script>
+        document.querySelector("#uploadBtn").addEventListener("click", function() {
+            this.classList.add("loading");
+            this.innerHTML = "Uploading...";
+        });
+    </script>
+
+</body>
+</html>
